@@ -4,13 +4,13 @@
 # Həmçinin Şəbəkədə olan digər qurğuların İP və MAC ünvanı qısa zamanda görüntülənir.
 # Hazırladı Orxan Bayramov.
 # Yazılım dili Python 3
-# 2021-ci il https://www.tty.az
+# 2021-ci il https://www.kht.az
 # !/usr/bin/env python
 
 import subprocess
 import netifaces
 import scapy.all as scapy
-
+import requests
 
 def printbanner():
     subprocess.call(["clear"])
@@ -20,11 +20,9 @@ def printbanner():
     print("██  ██  ██   ██ ██   ██ ██    ██ ██   ██ ██  ██ ██       TEAM")
     print("██   ██ ██   ██ ██   ██  ██████  ██   ██ ██   ████  https://kht.az\n")
 
-
 def find_router_ip():  # Şəbəkə routerinin ip ünvanının təyin edilməsi.
     gw = netifaces.gateways()
     return gw["default"][netifaces.AF_INET][0]
-
 
 def find_netmask():  # Şəbəkəyə çıxış interfeysinin və şəbəkə maskasının təyini.
     gw_device = netifaces.gateways()["default"]
@@ -33,7 +31,6 @@ def find_netmask():  # Şəbəkəyə çıxış interfeysinin və şəbəkə mask
     netmask = gw_netmask[netifaces.AF_INET][0]["netmask"]
     from netaddr import IPAddress
     return IPAddress(netmask).netmask_bits()
-
 
 def scan(ip):  # Şəbəkəyə qoşulmuş bütün qurğuların ip və mac ünvanlarının tapılması.
     arp_request = scapy.ARP(pdst=ip)
@@ -47,16 +44,24 @@ def scan(ip):  # Şəbəkəyə qoşulmuş bütün qurğuların ip və mac ünvan
         clients_list.append(clients_dict)
     return clients_list
 
-
 def print_result(result_list):
-    print("İP ünvan\t\t  MAC ünvan\n------------------------------------------------------")
+    print("İP ünvan\t  MAC ünvan\t\t  İstehsalçı\n------------------------------------------------------")
     for client in result_list:
-        print(client["ip"] + "\t\t" + client["mac"])
+        vendor_mac = client["mac"]
+        url = "https://api.macvendors.com/"
+        response = requests.get(url + vendor_mac)
+        vendor_name = response.content.decode()
+        print(client["ip"] + "\t" + client["mac"] + "\t" + vendor_name)
 
+try:
+    while True:
+        printbanner()
+        print("-------Şəbəkə analiz olunur!----- Çıxış CTRL + C ------")
+        ip = find_router_ip() + ("/") + str(find_netmask())
+        scan_result = scan(ip)
+        print_result(scan_result)
+        print("\nRouter IP:", find_router_ip(), "Şəbəkə Maskası:", find_netmask())
+        break
+except KeyboardInterrupt:
+    print("\n [+] CTRL + C .... Proses dayandırıldı!")
 
-printbanner()
-print("-------Şəbəkə analiz olunur!-------")
-ip = find_router_ip() + ("/") + str(find_netmask())
-scan_result = scan(ip)
-print_result(scan_result)
-print("\nRouter IP:", find_router_ip(), "Şəbəkə Maskası:", find_netmask())
