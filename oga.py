@@ -4,7 +4,7 @@
 # hədəf qurğunun ötürdüyü məlumatları əldə etmək imkanı yaradır.
 # Hazırladı Orxan Bayramov.
 # Yazılım dili Python 3
-# 2021-ci il https://www.tty.az
+# 2021-ci il https://www.kht.az
 # !/usr/bin/env python
 
 import subprocess
@@ -19,7 +19,7 @@ def printbanner():
     print("██  ██  ██   ██ ██   ██ ██       ██   ██ ████   ██      ETHICAL ")
     print("█████   ███████ ███████ ██   ███ ███████ ██ ██  ██      HACKING ")
     print("██  ██  ██   ██ ██   ██ ██    ██ ██   ██ ██  ██ ██       TEAM")
-    print("██   ██ ██   ██ ██   ██  ██████  ██   ██ ██   ████  https://tty.az\n")
+    print("██   ██ ██   ██ ██   ██  ██████  ██   ██ ██   ████  https://kht.az\n")
     print("  O R T A D A  -  G İ Z L Ə N M İ Ş  -  A D A M     ARP saxtakarlığı")
     print("---------------------------------------------------------------------")
 
