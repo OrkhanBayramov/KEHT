@@ -17,9 +17,9 @@ def printbanner():
     subprocess.call(["clear"])
     print("██   ██ ██   ██  █████   ██████   █████  ███    ██    AZERBAIJAN")
     print("██  ██  ██   ██ ██   ██ ██       ██   ██ ████   ██      ETHICAL ")
-    print("█████   ███████ ███████ ██   ███ ███████ ██ ██  ██      HACKERS ")
+    print("█████   ███████ ███████ ██   ███ ███████ ██ ██  ██      HACKING ")
     print("██  ██  ██   ██ ██   ██ ██    ██ ██   ██ ██  ██ ██       TEAM")
-    print("██   ██ ██   ██ ██   ██  ██████  ██   ██ ██   ████  https://kht.az\n")
+    print("██   ██ ██   ██ ██   ██  ██████  ██   ██ ██   ████  https://tty.az\n")
     print("  O R T A D A  -  G İ Z L Ə N M İ Ş  -  A D A M     ARP saxtakarlığı")
     print("---------------------------------------------------------------------")
 
@@ -51,9 +51,14 @@ def restore(dest_ip, src_ip):  # ARP cədvəlinin bərpası.
 
 
 def internet_access():
-    subprocess.call(["sudo", "bash", "-c", 'echo 1 > /proc/sys/net/ipv4/ip_forward'])
-    print(" [+] Hədəfin internet əlaqəsi təmin edilir!\n")
-
+    internet = input("İnternet bağlantısı təmin edilsin?")
+    if internet=="b":
+        subprocess.call(["sudo", "bash", "-c", 'echo 1 > /proc/sys/net/ipv4/ip_forward'])
+        print(" [+] Hədəfin internet əlaqəsi təmin edilir!\n")
+    if internet!="b":
+        subprocess.call(["sudo", "bash", "-c", 'echo 0 > /proc/sys/net/ipv4/ip_forward'])
+        print(" [+] Hədəfin internet əlaqəsi kəsildi!\n")
+        pass
 
 printbanner()
 
