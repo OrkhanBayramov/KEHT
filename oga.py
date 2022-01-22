@@ -52,12 +52,10 @@ def restore(dest_ip, src_ip):  # ARP cədvəlinin bərpası.
 
 def internet_access():
     internet = input("İnternet bağlantısı təmin edilsin?")
-    if internet=="b":
+    if internet == "b":
         subprocess.call(["sudo", "bash", "-c", 'echo 1 > /proc/sys/net/ipv4/ip_forward'])
         print(" [+] Hədəfin internet əlaqəsi təmin edilir!\n")
-    if internet!="b":
-        subprocess.call(["sudo", "bash", "-c", 'echo 0 > /proc/sys/net/ipv4/ip_forward'])
-        print(" [+] Hədəfin internet əlaqəsi kəsildi!\n")
+    if internet != "b":
         pass
 
 printbanner()
@@ -79,4 +77,5 @@ except KeyboardInterrupt:
     print("\n [+] CTRL + C .... Proses dayandırıldı!")
     restore(target, gateway)
     restore(gateway, target)
+    subprocess.call(["sudo", "bash", "-c", 'echo 0 > /proc/sys/net/ipv4/ip_forward'])
     print("\n [+] ARP Cədvəli bərpa edildi...")
