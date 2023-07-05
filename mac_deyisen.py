@@ -1,7 +1,7 @@
 # Şəbəkə interfeysinin Fiziki Ünvanını dəyişmək üçün Azərbaycan dilində intefeysi olan alət.
 # Hazırladı Orxan Bayramov.
 # Yazılım dili Python 3
-# 2021-ci il https://www.tty.az
+# 2021-ci il https://www.kht.az
 # !/usr/bin/env python
 
 import subprocess
