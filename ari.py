@@ -5,14 +5,14 @@
 # Hazırladı Orxan Bayramov.
 # Yazılım dili Python 3
 # 2021-ci il https://www.kht.az
-# !/usr/bin/env python
+#!/usr/bin/env python
 
 import subprocess
 import netifaces
 import scapy.all as scapy
 import requests
 
-def printbanner():
+def print_banner():
     subprocess.call(["clear"])
     print("██   ██ ██   ██  █████   ██████   █████  ███    ██    AZERBAIJAN")
     print("██  ██  ██   ██ ██   ██ ██       ██   ██ ████   ██      ETHICAL ")
@@ -20,48 +20,88 @@ def printbanner():
     print("██  ██  ██   ██ ██   ██ ██    ██ ██   ██ ██  ██ ██       TEAM")
     print("██   ██ ██   ██ ██   ██  ██████  ██   ██ ██   ████  https://kht.az\n")
 
-def find_router_ip():  # Şəbəkə routerinin ip ünvanının təyin edilməsi.
-    gw = netifaces.gateways()
-    return gw["default"][netifaces.AF_INET][0]
+def check_and_install_libraries():
+    required_libraries = ["netifaces", "scapy", "requests"]
+    missing_libraries = []
 
-def find_netmask():  # Şəbəkəyə çıxış interfeysinin və şəbəkə maskasının təyini.
-    gw_device = netifaces.gateways()["default"]
-    adapter = gw_device[netifaces.AF_INET][1]
-    gw_netmask = netifaces.ifaddresses(adapter)
-    netmask = gw_netmask[netifaces.AF_INET][0]["netmask"]
-    from netaddr import IPAddress
-    return IPAddress(netmask).netmask_bits()
+    for lib in required_libraries:
+        try:
+            __import__(lib)
+        except ImportError:
+            missing_libraries.append(lib)
 
-def scan(ip):  # Şəbəkəyə qoşulmuş bütün qurğuların ip və mac ünvanlarının tapılması.
-    arp_request = scapy.ARP(pdst=ip)
-    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
-    arp_request_broadcast = broadcast / arp_request
-    answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
+    if missing_libraries:
+        for lib in missing_libraries:
+            subprocess.call(["pip", "install", lib])
+        print("Installed the required libraries: " + ", ".join(missing_libraries))
+    else:
+        print("All required libraries are already installed.")
 
-    clients_list = []
-    for element in answered_list:
-        clients_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
-        clients_list.append(clients_dict)
-    return clients_list
+def find_router_ip():
+    try:
+        gateway = netifaces.gateways()['default'][netifaces.AF_INET][0]
+        return gateway
+    except Exception:
+        return None
+
+def find_netmask(ip):
+    try:
+        mask = ip.split('/')
+        return mask[1]
+    except Exception:
+        return "24"  # Set a default network mask (e.g., /24)
+
+def scan(ip):
+    try:
+        arp_request = scapy.ARP(pdst=ip)
+        broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+        arp_request_broadcast = broadcast / arp_request
+        answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
+
+        clients_list = []
+        for element in answered_list:
+            clients_dict = {"ip": element[1].psrc, "mac": element[1].hwsrc}
+            clients_list.append(clients_dict)
+        return clients_list
+    except Exception:
+        return None
 
 def print_result(result_list):
-    print("İP ünvan\t  MAC ünvan\t\t  İstehsalçı\n------------------------------------------------------")
+    print("IP Ünvan\tMAC Ünvan\tİstehsalçı")
+    print("-------------------------------")
     for client in result_list:
-        vendor_mac = client["mac"]
-        url = "https://api.macvendors.com/"
-        response = requests.get(url + vendor_mac)
-        vendor_name = response.content.decode()
-        print(client["ip"] + "\t" + client["mac"] + "\t" + vendor_name)
+        ip = client["ip"]
+        mac = client["mac"]
+        vendor_name = get_vendor_name(mac)
+        print(f"{ip}\t{mac}\t{vendor_name}")
 
-try:
-    while True:
-        printbanner()
-        print("-------Şəbəkə analiz olunur!----- Çıxış CTRL + C ------")
-        ip = find_router_ip() + ("/") + str(find_netmask())
-        scan_result = scan(ip)
-        print_result(scan_result)
-        print("\nRouter IP:", find_router_ip(), "Şəbəkə Maskası:", find_netmask())
-        break
-except KeyboardInterrupt:
-    print("\n [+] CTRL + C .... Proses dayandırıldı!")
+def get_vendor_name(mac):
+    try:
+        url = f"https://api.macvendors.com/{mac}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            return response.text
+        return "Not Found"
+    except Exception:
+        return "Error"
 
+if __name__ == "__main__":
+    check_and_install_libraries()
+    
+    try:
+        print_banner()
+        print("------- Şəbəkə analiz olunur! ------- Çıxış: CTRL + C -------")
+        
+        router_ip = find_router_ip()
+        if router_ip:
+            network_ip = router_ip + "/" + find_netmask(router_ip)
+            scan_result = scan(network_ip)
+            if scan_result:
+                print_result(scan_result)
+                print("\nRouter IP:", router_ip, "Şəbəkə Maskası:", find_netmask(router_ip))
+            else:
+                print("No devices found on the network.")
+        else:
+            print("Router not found.")
+    except KeyboardInterrupt:
+        print("\n[+] CTRL + C .... Proses dayandırıldı!")
