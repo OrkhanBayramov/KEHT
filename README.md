@@ -119,3 +119,36 @@ sudo pip3 install netifaces</code></pre>
 
 <p>İstifadəçiyə bir interfeys seçməsi təklif edilir və sonra təsadüfi və ya öz istənilən bir MAC ünvanı təyin etmək imkanı verilir.</p>
 
+<h1>=========================================</h1>
+
+<!-- O.G.A "Ortada Gizlənmiş Adam" ARP Saxtakarlığı Aləti -->
+
+<h1>O.G.A "Ortada Gizlənmiş Adam" ARP Saxtakarlığı Aləti</h1>
+
+<p>Bu Python skripti, aşağıdakı funksiyonları yerinə yetirir:</p>
+
+<ul>
+  <li>Şəbəkədə hədəf və marşrutlaşdırıcı arasına girərək, ARP cədvəlini saxtalaşdırır.</li>
+  <li>Hədəf qurğunun ötürdüyü məlumatları əldə etmək imkanı yaradır.</li>
+</ul>
+
+<h2>İstifadə Qaydaları</h2>
+
+<p>Skripti işlədərək, şəbəkədəki hədəf və marşrutlaşdırıcı arasına girərək ARP saxtakarlığı təmin edilir. İnternet əlaqəsi təmin etmək üçün tələb olunan əmri daxil edin.</p>
+
+<pre><code>sudo bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'</code></pre>
+
+<h2>Əsas Tələblər</h2>
+
+<p>Skriptin düzgün işləyə bilməsi üçün aşağıdakı tələblərə ehtiyac var:</p>
+
+<pre><code>sudo apt install python3 scapy</code></pre>
+
+<h2>İstifadə</h2>
+
+<p>Skripti işlədərkən, hədəf IP ünvanını daxil edin və internet əlaqəsini təyin edin:</p>
+
+<pre><code>python oga.py</code></pre>
+
+<p>CTRL + C düyməsinə basmaqla prosesi dayandırmaq mümkündür.</p>
+
