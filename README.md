@@ -28,7 +28,7 @@
 
 <pre><code>python ari.py</code></pre>
 
-<h1> ======================================== </h1>
+<h1>=========================================<//h1>
 
 <!-- HTTPS BYPASS -->
 
@@ -62,7 +62,7 @@ sudo pip3 install netifaces</code></pre>
 
 <pre><code>sudo python3 bypass_https.py</code></pre>
 
-<h1>====================================================================</h1>
+<h1>=========================================</h1>
 
 <h1>DNS Yönləndirmə Aləti</h1>
 
@@ -89,4 +89,33 @@ sudo pip3 install netifaces</code></pre>
 
 <pre><code>python dns_yon.py</code></pre>
 
+<h1>=========================================</h1>
+
+<!-- Şəbəkə interfeysinin Fiziki Ünvanını dəyişmək üçün Azərbaycan dilində intefeysi olan alət -->
+
+<h1>Şəbəkə Interfeysi Fiziki Ünvanını Dəyişmək Üçün Alət</h1>
+
+<p>Bu Python skripti, aşağıdakı funksiyonları yerinə yetirir:</p>
+
+<ul>
+  <li>Şəbəkə interfeysinin fiziki ünvanını dəyişmək.</li>
+</ul>
+
+<h2>İstifadə Qaydaları</h2>
+
+<p>Skripti işlədərək, şəbəkə interfeysinin fiziki ünvanını dəyişmək mümkündür. İstifadəçiyə interfeys seçmək və təsadüfi və ya öz istənilən bir MAC ünvanı təyin etmək imkanı verir.</p>
+
+<h2>Əsas Tələblər</h2>
+
+<p>Skriptin düzgün işləyə bilməsi üçün aşağıdakı tələblərə ehtiyac var:</p>
+
+<pre><code>sudo apt install python3</code></pre>
+
+<h2>İstifadə</h2>
+
+<p>Skripti işlədərkən, mövcud şəbəkə interfeyslərinin siyahısını görmək üçün:</p>
+
+<pre><code>python mac_deyisen.py</code></pre>
+
+<p>İstifadəçiyə bir interfeys seçməsi təklif edilir və sonra təsadüfi və ya öz istənilən bir MAC ünvanı təyin etmək imkanı verilir.</p>
 
