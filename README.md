@@ -173,3 +173,19 @@ sudo pip3 install netifaces</code></pre>
 
 <p>Nəticələri incələmək və saxlamaq üçün, CTRL + C düyməsinə basın.</p>
 
+<h1>=========================================</h1>
+
+<!-- Port Analiz Aləti -->
+
+<h1>Port Analizi Aləti</h1>
+    <h2>Təsvir</h2>
+    <p>Bu Python skripti, Azərbaycan dilində interfeysə sahib olan bir Port monitorinq alətidir. Şəbəkə interfeysləri, IP ünvanları, MAC ünvanları və əlaqəli proseslər haqqında məlumat təmin edir.</p>
+<h2>Xüsusiyyətlər</h2>
+<li>Mövcud şəbəkə interfeyslərini siyahılayır və istifadəçiyə təfərrüatlı araşdırma üçün birini seçməsi üçün təklif edir.</li>
+<li>Seçilmiş şəbəkə interfeysi üçün IP ünvanları və MAC ünvanları daxil olmaqla ətraflı məlumatları təmin edir.</li>
+<li>Seçilmiş şəbəkə interfeysi ilə əlaqəli prosesləri göstərir, IP, port, proses adı və PID nömrəsini göstərir.</li>
+<h2>Tələblər</h2>
+<li>Tələb olunan kitabxanalar avtomatik yüklənir.</li>
+<h2>İstifadə</h2>
+<li>Skripti işə salmaq üçün:</li>
+<pre><code>python port_analiz.py</code></pre>
