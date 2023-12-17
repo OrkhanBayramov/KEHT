@@ -152,3 +152,24 @@ sudo pip3 install netifaces</code></pre>
 
 <p>CTRL + C düyməsinə basmaqla prosesi dayandırmaq mümkündür.</p>
 
+<h1>=========================================</h1>
+
+<!-- Şəbəkə İzləmə Aləti -->
+
+<h1>Şəbəkə İzləmə Aləti</h1>
+
+<p>Bu Python skripti, aşağıdakı funksiyonları yerinə yetirir:</p>
+
+<ul>
+  <li>Şəbəkəyə qoşulduğu interfeys üzərindən keçən informasiyanı oxuyur və log saxlayır.</li>
+  <li>O.G.A aləti ilə birlikdə işlədikdə, hədəf qurğunun ötürdüyü məlumatları əldə etmək imkanı yaradır.</li>
+</ul>
+
+<h2>İstifadə Qaydaları</h2>
+
+<p>Skripti işlədərkən, şəbəkəyə qoşulduğu interfeysi seçin və informasiyanın izlənməsinə başlayın:</p>
+
+<pre><code>python paket_iz.py</code></pre>
+
+<p>Nəticələri incələmək və saxlamaq üçün, CTRL + C düyməsinə basın.</p>
+
