@@ -27,3 +27,38 @@
 <h2>Nümunə</h2>
 
 <pre><code>python ari.py</code></pre>
+
+<h1> ======================================== </h1>
+
+<!-- HTTPS BYPASS -->
+
+<h1> HTTPS BYPASS aləti </h1>
+
+<p>Bu Python skripti, aşağıdakı funksiyonları yerinə yetirir:</p>
+
+<ul>
+  <li>Hədəf qurğunun HTTPS ötürmələrini HTTP protokolu ilə əvəzləyir.</li>
+  <li>Hədəf qurğunun ötürdüyü məlumatları əldə etmək imkanı yaradır.</li>
+</ul>
+
+<h2>İstifadə Qaydaları</h2>
+
+<p>Skripti işlədərək, hədəf qurğunun HTTPS bağlantılarında SSL-TLS şifrlənməsinin ləğvi mümkündür.</p>
+
+<h2>Tələblərin Yoxlanılması və Quraşdırılması</h2>
+
+<p>Skriptin düzgün işləyə bilməsi üçün əsas tələblərin yoxlanılması və quraşdırılması:</p>
+
+<pre><code>sudo apt install python3-pip -y
+sudo pip3 install netifaces</code></pre>
+
+<p>Skript, Bettercap alətini istifadə edir. Əgər sistemdə yoxdursa, onu avtomatik quraşdırmaq üçün:</p>
+
+<pre><code>sudo apt install bettercap -y</code></pre>
+
+<h2>İstifadə</h2>
+
+<p>Skripti işlədərkən, şəbəkə interfeysi seçilir və Bettercap vasitəsilə HTTPS bypass prosesi başladılır.</p>
+
+<pre><code>sudo python3 bypass_https.py</code></pre>
+
