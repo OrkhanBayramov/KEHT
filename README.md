@@ -62,3 +62,31 @@ sudo pip3 install netifaces</code></pre>
 
 <pre><code>sudo python3 bypass_https.py</code></pre>
 
+<h1>====================================================================</h1>
+
+<h1>DNS Yönləndirmə Aləti</h1>
+
+<p>Bu Python skripti, aşağıdakı funksiyonları yerinə yetirir:</p>
+
+<ul>
+  <li>Hədəf qurğu və ya hədəf Domain yaxud İP ünvanı daxil edilir.</li>
+  <li>Hədəfin daxil olmaq istədiyi ünvan lokal serverdə saxta olaraq hazırlanmış ünvana yönləndirilir.</li>
+</ul>
+
+<h2>İstifadə Qaydaları</h2>
+
+<p>Skriptin düzgün işləyə bilməsi üçün:</p>
+
+<pre><code>sudo iptables -I FORWARD -j NFQUEUE --queue-num 0</code></pre>
+
+<h2>Prosesi Dayandırmaq</h2>
+
+<p>Skripti işlədərkən, terminalda "CTRL + C" düyməsinə basaraq prosesi dayandırmaq mümkündür.</p>
+
+<h2>İstifadə</h2>
+
+<p>Skripti işlədərkən, yönləndiriləcək domain və ya İP ünvanı daxil edilir.</p>
+
+<pre><code>python dns_yon.py</code></pre>
+
+
